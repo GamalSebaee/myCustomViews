@@ -5,7 +5,7 @@ apply plugin: 'maven-publish'
 publish {
     def groupProjectID = 'com.magints.customviews'
     def artifactProjectID = 'littlecustomlib'
-    def publishVersionID = '1.0.0'
+    def publishVersionID = '1.0.2'
 
     userOrg = 'owncompany'
     repoName = 'littlecustomlib'
