@@ -5,6 +5,7 @@
         <attr name="textSize" format="dimension" />
         <attr name="valueRate" format="string" />
         <attr name="textColor" format="color|reference" />
+        <attr name="fontType" format="string" />
 
         <attr name="secondaryTextColor" format="color|reference" />
         <attr name="text" format="string" />
@@ -17,5 +18,12 @@
         </attr>
         <attr name="num_stars" format="integer"  />
 
+    </declare-styleable>
+
+    <declare-styleable name="customSpinner">
+        <attr name="setImage" format="boolean" />
+        <attr name="hideText" format="boolean" />
+        <attr name="setArrowColor" format="color|reference" />
+        <attr name="setArrowIcon" format="reference" />
     </declare-styleable>
 </resources>

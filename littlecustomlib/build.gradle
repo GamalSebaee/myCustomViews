@@ -1,5 +1,20 @@
+apply plugin: 'com.novoda.bintray-release'
 apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
+//Step II: Add the below publish details
+publish {
+    def groupProjectID = 'com.magints.customviews'
+    def artifactProjectID = 'littlecustomlib'
+    def publishVersionID = '1.0.0'
 
+    userOrg = 'owncompany'
+    repoName = 'littlecustomlib'
+    groupId = groupProjectID
+    artifactId = artifactProjectID
+    publishVersion = publishVersionID
+    desc = 'Android library for displaying data based on JSON configuration fetched from server. With this library, you can kiss goodbye to string.xml, dimen.xml, arrays.xml. Keep all your string/integer/array config in one file. The library will automatically fetch the data from the url you provide.'
+    website = 'https://github.com/GamalSebaee/myCustomViews'
+}
 android {
     compileSdkVersion 28
 
@@ -22,31 +37,7 @@ android {
     }
 
 }
-/*
-ext {
-    bintrayRepo = 'maven'
-    bintrayName = 'littlecustomlib'
 
-    publishedGroupId = 'ua.org.tenletters.widget'
-    libraryName = 'littlecustomlib'
-    artifact = 'littlecustomlib'
-
-    libraryDescription = 'This view is a container that supports diagonal scroll and fling gesture. It is based on AOSP HorizontalScrollView.'
-
-    siteUrl = 'https://github.com/LissF/littlecustomlib'
-    gitUrl = 'https://github.com/LissF/littlecustomlib.git'
-
-    libraryVersion = '0.3.3'
-
-    developerId = 'lissf'
-    developerName = 'Yegor Zatsepin'
-    developerEmail = 'Liss_F@ukr.net'
-
-    licenseName = 'The Apache Software License, Version 2.0'
-    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-    allLicenses = ["Apache-2.0"]
-}
-*/
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -54,6 +45,12 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
 }
-apply plugin: 'com.jfrog.bintray'
-apply plugin: 'com.github.dcendents.android-maven'
+

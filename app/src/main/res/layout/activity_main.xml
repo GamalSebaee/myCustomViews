@@ -1,23 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:SmartNumericTextView="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:SmartNumericTextView="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <com.libs.customlibs.CustomRatingBar
         android:id="@+id/customRateBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+
         android:layout_marginTop="10dp"
         SmartNumericTextView:num_stars="5"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="parent"
         SmartNumericTextView:text="hello world"
-        SmartNumericTextView:valueRate="3" />
+        SmartNumericTextView:valueRate="3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <com.libs.customlibs.CustomSpinnerView
+        android:id="@+id/spinnerList"
+        app:setImage="false"
+        app:hideText="false"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        app:textColor="#fff"
+        app:setArrowColor="#fff"
+        app:fontType="txt_font"
+        app:text="hello world"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/btnViewData"
@@ -30,4 +45,4 @@
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@id/customRateBar"
         app:layout_constraintTop_toBottomOf="@id/customRateBar" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
