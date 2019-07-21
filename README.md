@@ -33,10 +33,10 @@ current tag is v1.0.2
       -  use this 
         customRateBar.setNumberStars(10);
        - to get rating use this 
-         customRateBar.getRateValue() */
+         customRateBar.getRateValue() 
 
-/* to use spinner
-// set this to xml file
+       <h3>to use spinner</h3>
+      set this to xml file
     <com.libs.customlibs.CustomSpinnerView
         android:id="@+id/spinnerList"
         app:setImage="false"
