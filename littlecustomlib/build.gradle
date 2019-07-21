@@ -1,9 +1,13 @@
 apply plugin: 'com.novoda.bintray-release'
 apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
+// for Java libraries
+apply plugin: 'maven'
+// for Android libraries
+apply plugin: 'com.github.dcendents.android-maven'
 //Step II: Add the below publish details
 publish {
-    def groupProjectID = 'com.magints.customviews'
+    def groupProjectID = 'com.github.GamalSebaee'
     def artifactProjectID = 'littlecustomlib'
     def publishVersionID = '1.0.2'
 
@@ -45,7 +49,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
 
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
