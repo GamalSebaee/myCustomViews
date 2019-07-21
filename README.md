@@ -10,7 +10,8 @@ first add lib to your project
 current tag is v1.0.2
 <h3>    implementation 'com.github.GamalSebaee:myCustomViews:tag'</h3>
 
-/*to use ratingBar*/
+/*to use ratingBar
+
      <com.libs.customlibs.CustomRatingBar
         android:id="@+id/customRateBar"
         android:layout_width="wrap_content"
@@ -20,8 +21,7 @@ current tag is v1.0.2
         app:starSize="50dp"
         android:layout_gravity="center_horizontal"
         app:valueRate="3"/>
-        
-        /*
+
         num_stars : number of stars shown in rating bar 
         valueRate : rate value
         starSize : size of star icon defalut is 32 dp
