@@ -47,4 +47,9 @@ public class MainActivity extends AppCompatActivity implements SpinnerListCallBa
     public void popUp_ChooseCustomCountry(int postion, CustomSpinnerModel customSpinnerModel) {
         spinnerList.popUp_ChooseCustomCountry(postion,customSpinnerModel);
     }
+
+    /*@Override
+    public void popUp_ChooseCustomCountry(int postion, CustomSpinnerModel customSpinnerModel) {
+        spinnerList.popUp_ChooseCustomCountry(postion,customSpinnerModel);
+    }*/
 }

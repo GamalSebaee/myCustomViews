@@ -1,23 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <declare-styleable name="SmartNumericTextView">
+    <declare-styleable name="generalStyle">
         <attr name="textSize" format="dimension" />
-        <attr name="valueRate" format="string" />
         <attr name="textColor" format="color|reference" />
         <attr name="fontType" format="string" />
-
-        <attr name="secondaryTextColor" format="color|reference" />
         <attr name="text" format="string" />
-        <attr name="textPercentage" format="integer" />
-        <attr name="suffixSymbol" format="string" />
         <attr name="textStyle">
             <enum name="normal" value="0" />
             <enum name="bold" value="1" />
             <enum name="italic" value="2" />
         </attr>
-        <attr name="num_stars" format="integer"  />
-
     </declare-styleable>
 
     <declare-styleable name="customSpinner">
@@ -26,5 +18,16 @@
         <attr name="setArrowColor" format="color|reference" />
         <attr name="setArrowIcon" format="reference" />
         <attr name="defalutText" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="customRatingBar">
+        <attr name="starSize" format="dimension" />
+        <attr name="valueRate" format="string" />
+        <attr name="secondaryTextColor" format="color|reference" />
+        <attr name="textPercentage" format="integer" />
+        <attr name="suffixSymbol" format="string" />
+        <attr name="num_stars" format="integer"  />
+        <attr name="starIcon_active" format="reference"  />
+        <attr name="starIcon_notActive" format="reference"  />
     </declare-styleable>
 </resources>

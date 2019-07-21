@@ -3,68 +3,99 @@ package com.libs.customlibs;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+
+import java.util.Objects;
 
 public class CustomRatingBar extends LinearLayout {
     private Object rateValue = "0";
+    private double rateSendedTo = 0;
+    private int numberStars = 0;
+    private Context context;
+    private LinearLayout ratingContainer;
+    private TypedArray customRatingBar;
+    private Drawable starIcon_active=null;
+    private Drawable starIcon_notActive=null;
 
-    public CustomRatingBar(Context context) {
-        super(context);
-    }
-
-    public CustomRatingBar(final Context context, @androidx.annotation.Nullable AttributeSet attrs) {
+    @SuppressLint("CustomViewStyleable")
+    public CustomRatingBar(final Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         inflate(context, R.layout.rating_bar_content, this);
+        this.context = context;
+        ratingContainer = findViewById(R.id.ratingContainer);
+        customRatingBar = context.obtainStyledAttributes(attrs,
+                R.styleable.customRatingBar);
+        initPageContent();
+    }
 
-        final ImageView imageView = findViewById(R.id.image);
-        TextView textView = findViewById(R.id.caption);
-        final LinearLayout ratingContainer = findViewById(R.id.ratingContainer);
+    private void initPageContent() {
+        numberStars = customRatingBar.getInteger(R.styleable.customRatingBar_num_stars, 0);
+        starSize = customRatingBar.getDimension(R.styleable.customRatingBar_starSize, 32);
+        starIcon_active=customRatingBar.getDrawable(R.styleable.customRatingBar_starIcon_active);
+        starIcon_notActive=customRatingBar.getDrawable(R.styleable.customRatingBar_starIcon_notActive);
 
-        @SuppressLint("CustomViewStyleable") TypedArray attributes = context.obtainStyledAttributes(attrs,
-                R.styleable.SmartNumericTextView);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            rateSendedTo = Double.parseDouble(Objects.requireNonNull(customRatingBar.getString(R.styleable.customRatingBar_valueRate)));
+        }
+        setRatingContent();
+        customRatingBar.recycle();
+    }
 
-        int numberStars = attributes.getInteger(0, R.styleable.SmartNumericTextView_num_stars);
+    float starSize=0;
 
-        double rateSendedTo= Double.parseDouble(attributes.getString(R.styleable.SmartNumericTextView_valueRate));
-        textView.setText(attributes.getString(R.styleable.SmartNumericTextView_text) + " : " +
-                numberStars + " : " + rateSendedTo);
+    private void setRatingContent() {
         for (int i = 0; i < numberStars; i++) {
             final ImageView imageView_STar = new ImageView(context);
-            ViewGroup.LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
-            ((LayoutParams) layoutParams).leftMargin = 5;
-            ((LayoutParams) layoutParams).rightMargin = 5;
+            LayoutParams layoutParams = new LayoutParams((int) starSize, (int)starSize);
+            layoutParams.leftMargin = 5;
+            layoutParams.rightMargin = 5;
             imageView_STar.setLayoutParams(layoutParams);
 
-            imageView_STar.setImageResource(R.drawable.ic_rate_icon);
+            if(starIcon_active != null){
+                imageView_STar.setImageDrawable(starIcon_active);
+            }else{
+                imageView_STar.setImageResource(R.drawable.ic_rate_icon);
+            }
+
+
             if (i < rateSendedTo) {
-                imageView_STar.setColorFilter(ContextCompat.getColor(context, R.color.trans_color), android.graphics.PorterDuff.Mode.SRC_IN);
+                if(starIcon_active != null){
+                    imageView_STar.setImageDrawable(starIcon_active);
+                }else{
+                    imageView_STar.setImageResource(R.drawable.ic_rate_icon);
+                    imageView_STar.setColorFilter(ContextCompat.getColor(context, R.color.trans_color), android.graphics.PorterDuff.Mode.SRC_IN);
+                }
             } else {
-                imageView_STar.setColorFilter(ContextCompat.getColor(context, R.color.trans_color2), android.graphics.PorterDuff.Mode.SRC_IN);
+                if(starIcon_notActive != null){
+                    imageView_STar.setImageDrawable(starIcon_notActive);
+                }else{
+                    imageView_STar.setImageResource(R.drawable.ic_rate_icon);
+                    imageView_STar.setColorFilter(ContextCompat.getColor(context, R.color.trans_color2), android.graphics.PorterDuff.Mode.SRC_IN);
+                }
             }
 
             int tagValue = i;
             imageView_STar.setTag("" + (tagValue++));
+            final int finalTagValue = tagValue;
             imageView_STar.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    setRateValue(imageView_STar.getTag());
+                    setRateValue(finalTagValue);
                     setRateIconsList(context, ratingContainer, imageView_STar.getTag());
-                    //Toast.makeText(context, "tag value : " + imageView_STar.getTag(), Toast.LENGTH_SHORT).show();
                 }
             });
             ratingContainer.addView(imageView_STar);
 
         }
-        attributes.recycle();
     }
 
     private void setRateIconsList(Context context, LinearLayout linearLayout, Object tagVlue) {
@@ -72,11 +103,32 @@ public class CustomRatingBar extends LinearLayout {
         for (int jj = 0; jj < linearLayout.getChildCount(); jj++) {
             ImageView imageView = (ImageView) linearLayout.getChildAt(jj);
             if (jj <= newRate) {
-                imageView.setColorFilter(ContextCompat.getColor(context, R.color.trans_color), android.graphics.PorterDuff.Mode.SRC_IN);
+                if(starIcon_active != null){
+                    imageView.setImageDrawable(starIcon_active);
+                }else{
+                    imageView.setImageResource(R.drawable.ic_rate_icon);
+                    imageView.setColorFilter(ContextCompat.getColor(context, R.color.trans_color), android.graphics.PorterDuff.Mode.SRC_IN);
+                }
             } else {
-                imageView.setColorFilter(ContextCompat.getColor(context, R.color.trans_color2), android.graphics.PorterDuff.Mode.SRC_IN);
+                if(starIcon_notActive != null){
+                    imageView.setImageDrawable(starIcon_notActive);
+                }else{
+                    imageView.setImageResource(R.drawable.ic_rate_icon);
+                    imageView.setColorFilter(ContextCompat.getColor(context, R.color.trans_color2),
+                            android.graphics.PorterDuff.Mode.SRC_IN);
+                }
+
             }
         }
+    }
+
+    public int getNumberStars() {
+        return numberStars;
+    }
+
+    public void setNumberStars(int numberStars) {
+        this.numberStars = numberStars;
+        setRatingContent();
     }
 
     public Object getRateValue() {

@@ -46,7 +46,7 @@ public class UiUtil {
 
     private static final Hashtable<String, SoftReference<Typeface>> fontCache = new Hashtable<String, SoftReference<Typeface>>();
 
-    private static Typeface getFont(Context c, String name) {
+    public static Typeface getFont(Context c, String name) {
         synchronized (fontCache) {
             if (fontCache.get(name) != null) {
                 SoftReference<Typeface> ref = fontCache.get(name);

@@ -1,6 +1,5 @@
 package com.libs.customlibs.spinner_dailog;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -27,7 +26,8 @@ public class SpinnerPopupList extends DialogFragment implements SpinnerListCallB
     private boolean show_img = false;
     private RecyclerView country_listrecyclerView;
     private String fontType;
-    List<CustomSpinnerModel> allSpinnerDataList = new ArrayList<>();
+    private EditText etSearchContent;
+    private List<CustomSpinnerModel> allSpinnerDataList = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,11 +39,16 @@ public class SpinnerPopupList extends DialogFragment implements SpinnerListCallB
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_country_list_dialog, container, false);
+        initPage(view);
+
+        return view;
+    }
+
+    private void initPage(View view) {
         country_listrecyclerView = view.findViewById(R.id.country_list);
-        EditText etSearchContent = view.findViewById(R.id.etSearchContent);
+        etSearchContent = view.findViewById(R.id.etSearchContent);
         country_listrecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         popUpCallBack = (SpinnerListCallBack.PopUpCallBack) getActivity();
-
         if (getArguments() != null) {
             String listDataStr = getArguments().getString("data_list");
             show_img = getArguments().getBoolean("show_img", false);
@@ -53,10 +58,16 @@ public class SpinnerPopupList extends DialogFragment implements SpinnerListCallB
             Gson gson = new Gson();
             List<CustomSpinnerModel> countryList = gson.fromJson(listDataStr, dataList.getType());
             allSpinnerDataList.clear();
-            allSpinnerDataList.addAll(countryList);
+            if (countryList != null) {
+                allSpinnerDataList.addAll(countryList);
+            }
             setAllDataList(allSpinnerDataList);
         }
 
+        setSearchListener();
+    }
+
+    private void setSearchListener() {
         etSearchContent.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -80,13 +91,11 @@ public class SpinnerPopupList extends DialogFragment implements SpinnerListCallB
             }
         });
 
-
-        return view;
     }
 
     private void setAllDataList(List<CustomSpinnerModel> countryList) {
         SpinnerListAdapter countryListAdapter = new SpinnerListAdapter(getActivity(), countryList,
-                show_img, fontType,this);
+                show_img, fontType, this);
         country_listrecyclerView.setAdapter(countryListAdapter);
     }
 
