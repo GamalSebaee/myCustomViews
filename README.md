@@ -27,14 +27,13 @@ current tag is v1.0.2
         starSize : size of star icon defalut is 32 dp
         starIcon_active : this is to set star icon in case of active // opational
         starIcon_notActive : this is to set star icon in case of not active // opational
-        */
+        
         
         if you need to set rating number from code 
-use this 
+      -  use this 
         customRateBar.setNumberStars(10);
-        
-        to get rating use this 
-                customRateBar.getRateValue()
+       - to get rating use this 
+                customRateBar.getRateValue() */
 
 
         
