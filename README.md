@@ -8,6 +8,14 @@ if you need to use custom spinner with custom fontface and with search dailog yo
 to use it 
 first add lib to your project 
 current tag is v1.0.2
+add this inside build.gradle in project level
+
+<h3>   
+     repositories {
+        maven { url 'https://jitpack.io' }
+    }
+</h3>
+and inside build.gradle into app add this 
 <h3>    implementation 'com.github.GamalSebaee:myCustomViews:tag'</h3>
 
 /* to use ratingBar
