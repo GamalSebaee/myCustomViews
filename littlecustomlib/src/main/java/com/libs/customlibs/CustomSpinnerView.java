@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -32,6 +33,8 @@ public class CustomSpinnerView extends LinearLayout implements SpinnerListCallBa
     TextView spinnerTextView;
     ImageView spinnerArrowImg;
     private boolean addImageIconStatus = false;
+    private String defalutText;
+    private String fontType;
     private List<CustomSpinnerModel> allDataList = new ArrayList<>();
 
     public CustomSpinnerView(Context context, @Nullable AttributeSet attrs) {
@@ -71,7 +74,7 @@ public class CustomSpinnerView extends LinearLayout implements SpinnerListCallBa
                     context.getResources().getColor(R.color.colorAccent)));
         }
 
-        String fontType = attributes2.getString(R.styleable.SmartNumericTextView_fontType);
+        fontType = attributes2.getString(R.styleable.SmartNumericTextView_fontType);
         if (fontType != null) {
             spinnerTextView.setTypeface(getFont(fontType));
         }
@@ -89,12 +92,16 @@ public class CustomSpinnerView extends LinearLayout implements SpinnerListCallBa
         spinner_Content.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                showCustomMSG();
                 openSpinnerListAdater();
             }
         });
 
 
+    }
+
+    private void showCustomMSG() {
+        Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
     }
 
     private void openSpinnerListAdater() {
@@ -103,6 +110,7 @@ public class CustomSpinnerView extends LinearLayout implements SpinnerListCallBa
         Bundle bundle = new Bundle();
         bundle.putString("data_list", new Gson().toJson(getAllDataList()));
         bundle.putBoolean("show_img", addImageIconStatus);
+        bundle.putString("fontType", fontType);
         spinnerPopupList.setArguments(bundle);
         spinnerPopupList.show(fragmentActivity.getSupportFragmentManager(), "tag");
     }

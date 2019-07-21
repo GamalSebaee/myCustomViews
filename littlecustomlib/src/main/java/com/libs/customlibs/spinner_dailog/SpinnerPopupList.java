@@ -26,6 +26,7 @@ public class SpinnerPopupList extends DialogFragment implements SpinnerListCallB
     private SpinnerListCallBack.PopUpCallBack popUpCallBack;
     private boolean show_img = false;
     private RecyclerView country_listrecyclerView;
+    private String fontType;
     List<CustomSpinnerModel> allSpinnerDataList = new ArrayList<>();
 
     @Override
@@ -46,6 +47,7 @@ public class SpinnerPopupList extends DialogFragment implements SpinnerListCallB
         if (getArguments() != null) {
             String listDataStr = getArguments().getString("data_list");
             show_img = getArguments().getBoolean("show_img", false);
+            fontType = getArguments().getString("fontType", null);
             TypeToken<List<CustomSpinnerModel>> dataList = new TypeToken<List<CustomSpinnerModel>>() {
             };
             Gson gson = new Gson();
@@ -83,7 +85,8 @@ public class SpinnerPopupList extends DialogFragment implements SpinnerListCallB
     }
 
     private void setAllDataList(List<CustomSpinnerModel> countryList) {
-        SpinnerListAdapter countryListAdapter = new SpinnerListAdapter(getActivity(), countryList, show_img, this);
+        SpinnerListAdapter countryListAdapter = new SpinnerListAdapter(getActivity(), countryList,
+                show_img, fontType,this);
         country_listrecyclerView.setAdapter(countryListAdapter);
     }
 

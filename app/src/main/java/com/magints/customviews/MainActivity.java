@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements SpinnerListCallBa
 
         for(int i=0;i<50;i++){
             CustomSpinnerModel customSpinnerModel=new CustomSpinnerModel();
-            customSpinnerModel.setSpinnerText("جمال سباعي "+i);
+            customSpinnerModel.setSpinnerText("جمال"+i);
             allDataList.add(customSpinnerModel);
         }
         spinnerList.setAllDataList(allDataList);

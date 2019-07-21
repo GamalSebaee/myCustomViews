@@ -1,6 +1,8 @@
 package com.libs.customlibs.spinner_dailog;
 
 import android.content.Context;
+import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +13,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.libs.customlibs.CustomFontsUtilits;
 import com.libs.customlibs.R;
+import com.libs.customlibs.UiUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,13 +25,15 @@ public class SpinnerListAdapter extends RecyclerView.Adapter<SpinnerListAdapter.
     private Context context;
     private boolean show_img;
     private SpinnerListCallBack.AdapterCallBack adapterCallBack;
+    private String fontType;
 
     // Provide a suitable constructor (depends on the kind of dataset)
     public SpinnerListAdapter(Context context,
-                              List<CustomSpinnerModel> list, boolean show_img, SpinnerListCallBack.AdapterCallBack adapterCallBack) {
+                              List<CustomSpinnerModel> list, boolean show_img, String fontType, SpinnerListCallBack.AdapterCallBack adapterCallBack) {
         this.list = list;
         this.context = context;
         this.show_img = show_img;
+        this.fontType = fontType;
         this.adapterCallBack = adapterCallBack;
 
     }
@@ -95,6 +101,11 @@ public class SpinnerListAdapter extends RecyclerView.Adapter<SpinnerListAdapter.
                 spinnerImg.setVisibility(View.VISIBLE);
             } else {
                 spinnerImg.setVisibility(View.GONE);
+            }
+            if (CustomFontsUtilits.vaildFontType(fontType)) {
+                country_txt.setTypeface(Typeface.createFromAsset(
+                        context.getAssets(),
+                        fontType));
             }
 
         }

@@ -25,7 +25,7 @@ public class UiUtil {
         a.recycle();
     }
 
-    private static void setCustomFont(View textViewOrButton, Context ctx, String asset) {
+    public static void setCustomFont(View textViewOrButton, Context ctx, String asset) {
         if (TextUtils.isEmpty(asset))
             return;
         Typeface tf = null;
@@ -57,7 +57,7 @@ public class UiUtil {
 
             Typeface typeface = Typeface.createFromAsset(
                     c.getAssets(),
-                    "AppFonts/" + name
+                     name
             );
             fontCache.put(name, new SoftReference<Typeface>(typeface));
 
