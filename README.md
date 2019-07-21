@@ -10,7 +10,7 @@ first add lib to your project
 current tag is v1.0.2
 <h3>    implementation 'com.github.GamalSebaee:myCustomViews:tag'</h3>
 
-/*to use ratingBar
+/* to use ratingBar
 
      <com.libs.customlibs.CustomRatingBar
         android:id="@+id/customRateBar"
@@ -33,7 +33,49 @@ current tag is v1.0.2
       -  use this 
         customRateBar.setNumberStars(10);
        - to get rating use this 
-                customRateBar.getRateValue() */
+         customRateBar.getRateValue() */
+
+/* to use spinner
+// set this to xml file
+    <com.libs.customlibs.CustomSpinnerView
+        android:id="@+id/spinnerList"
+        app:setImage="false"
+        app:hideText="false"
+        android:paddingLeft="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:paddingRight="5dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:textColor="#fff"
+        app:setArrowColor="#fff"
+        app:text="hello world"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+        /// avery row in spinner have 3 views 
+          image ,text and indecator icon 
+        app:setImage="false"  // if you need your row not have image set this parameter to false or not set it  defalut false
+        app:hideText="false" // if you need your row not have text set this parameter to true defalut value false
+        app:textColor="#fff" // to set spinner text color defalut black with #000
+        app:setArrowColor="#fff" // this to indecator color
+        app:setArrowIcon="referance" // this is to set indecator image defalut is arrow down
+        app:defalutText="text" //this for hint text shown when no items clicked
+        
+        // in your activity or fragment
+        CustomSpinnerView  spinnerList=findViewById(R.id.spinnerList); //init view 
+        spinnerList.setAllDataList(allDataList); // set data 
+        List<CustomSpinnerModel> allDataList=new ArrayList<>();
+          allDataList // it is list of   
+          <h3>and the last step</h3>  
+          make your activity of fragment implement (implements SpinnerListCallBack.PopUpCallBack )
+          nd override method */
+                     
+                     
+        
+        
+        
+
 
 
         
